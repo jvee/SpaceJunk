@@ -21,3 +21,7 @@ SpaceJunk
 - Привести тесты в порядок .
 - Точнее описать выбрасываемые ошибки.
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jvee/spacejunk/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
