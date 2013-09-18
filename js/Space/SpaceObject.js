@@ -58,6 +58,7 @@ define(function () {
 				if (options.maxLength !== undefined && options.maxLength < options.value.length) return false;
 				break;
 			case 'position' :
+			case 'space-position' :
 				if (options.value instanceof SpaceObject) return true;
 				if (Object.prototype.toString.call(options.value) !== '[object Array]') return false;
 				if (options.value.length !== 2) return false;
@@ -78,7 +79,7 @@ define(function () {
 	 * @return {Boolean}
 	 */
 	SpaceObject.prototype.isSamePosition = function(position) {
-		if (!this._isValidArgument({value: position, type: 'position'})) throw new Error('Wrong "Position" argument');
+		if (!this._isValidArgument({value: position, type: 'space-position'})) throw new Error('Wrong "Position" argument');
 
 		if (position instanceof SpaceObject) {
 			return position.getCoords().toString() === this.getCoords().toString();

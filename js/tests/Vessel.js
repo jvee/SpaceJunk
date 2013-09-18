@@ -1,4 +1,4 @@
-define(['Vessel'], function (Vessel) {
+define(['Vessel', 'Planet', 'SpaceObject'], function (Vessel, Planet, SpaceObject) {
 
 	var Desc, Vars;
 
@@ -70,5 +70,22 @@ define(['Vessel'], function (Vessel) {
 	Condition = Vars.vessel.flyTo([0, 0])._position.toString() === Vars.target;
 	console.assert(Condition, Desc);
 
+	Desc = 'Method _isValidArgument({value: planet, type: position}) should return true';
+	Vars = {
+		planet: new Planet('Tatooine', [0,0], 0),
+		vessel: new Vessel('DeathStar', [1,1], 1000),
+		target: true
+	};
+	Condition = Vars.vessel._isValidArgument({value: Vars.planet, type: 'position'}) === Vars.target;
+	console.assert(Condition, Desc);
+
+	Desc = 'Method _isValidArgument({value: spaceObject, type: \'position\'}) should return false';
+	Vars = {
+		spaceObject: new SpaceObject('Trash', [0,0]),
+		vessel: new Vessel('DeathStar', [1,1], 1000),
+		target: false
+	};
+	Condition = Vars.vessel._isValidArgument({value: Vars.spaceObject, type: 'position'}) === Vars.target;
+	console.assert(Condition, Desc);
 
 });
