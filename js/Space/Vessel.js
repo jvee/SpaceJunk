@@ -20,6 +20,24 @@ define(['helpers', 'SpaceObject'], function (helpers, SpaceObject) {
 
 	helpers.extend(Vessel, SpaceObject);
 
+	/**
+	 * Расширения метода валидации родительского класса SpaceObject
+	 * @name Vessel._isValidArgument
+	 * @param  {Object}  options 
+	 * @return {Boolean}
+	 */
+	Vessel.prototype._isValidArgument = function (options) {
+		var result = SpaceObject.prototype._isValidArgument.call(this, options);
+
+		if (!result) return false;
+
+		if (options.type === 'position' && Object.prototype.toString.call(options.value) !== '[object Array]') {
+			if (options.value.constructor.name !== 'Planet') return false;
+		}
+
+		return true;
+	};
+
 	/** 
 	 * Наименование типа объекта 
 	 * @type {String}
