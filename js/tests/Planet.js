@@ -2,7 +2,8 @@ define(['Planet', 'Vessel'],function (Planet, Vessel) {
 
 	var desc, condition,
 		planet = new Planet('Tatooine', [21, 21], 10000),
-		vessel = new Vessel('DeathStar', [21,21], 1000);
+		vessel = new Vessel('DeathStar', [21,21], 1000),
+		Vars;
 
 	// ====================
 	desc = '[Planet]: planet._name should return "Tatooine"';
@@ -113,5 +114,25 @@ define(['Planet', 'Vessel'],function (Planet, Vessel) {
 	//condition === planet && (condition = false);
 	try {planet.unloadCargoFrom(vessel, 1500);} catch (e) {condition = e.message === 'Vessel too far from planet';}
 	console.assert(condition, desc);
+
+
+
+
+	Desc = 'Method _isValidArgument({value: [0,1], type: position}) should return true';
+	Vars = {
+		planet: new Planet('Tatooine', [0,0], 0),
+		target: true
+	};
+	Condition = Vars.planet._isValidArgument({value: [0,1], type: 'position'}) === Vars.target;
+	console.assert(Condition, Desc);
+
+	Desc = 'Method _isValidArgument({value: spaceObject, type: \'position\'}) should return false';
+	Vars = {
+		planet: new Planet('Tatooine', [0,0], 0),
+		vessel: new Vessel('DeathStar', [1,1], 1000),
+		target: false
+	};
+	Condition = Vars.planet._isValidArgument({value: Vars.vessel, type: 'position'}) === Vars.target;
+	console.assert(Condition, Desc);
 
 });
